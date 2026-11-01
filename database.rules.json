@@ -1,0 +1,54 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "owners": {
+      "$deviceId": {
+        ".read": "auth != null",
+        ".write": "auth != null && (!data.exists() || data.val() === auth.uid)"
+      }
+    },
+    "devices": {
+      "$deviceId": {
+        ".read": "auth != null",
+        "config": {
+          ".write": "auth != null"
+        },
+        "command": {
+          ".write": "auth != null"
+        },
+        "control": {
+          ".write": "auth != null"
+        },
+        "telemetry": {
+          ".write": "auth != null"
+        },
+        "status": {
+          ".write": "auth != null"
+        }
+      }
+    },
+    "history": {
+      "$deviceId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+    "waterLogs": {
+      "$deviceId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+    "alerts": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null"
+      }
+    }
+  }
+}
